@@ -4,6 +4,11 @@
   "version": "1.0.0",
   "description": "Ayden的图标库",
   "repository_url": "https://github.com/weihao0929/icon_library",
+  
+  // 新增：图标库自身的标识图标
+  "library_icon": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Ayden_icon.jpg",
+  "icon": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Ayden_icon.jpg",
+  
   "base_path": "JPEG/",
   "last_updated": "2024-01-01",
   "icons": [

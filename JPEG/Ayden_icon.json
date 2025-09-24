@@ -1,34 +1,28 @@
 {
   "name": "Ayden_icon",
-  "author": "Ayden",
-  "version": "1.0.0",
-  "description": "Ayden的图标库",
-  "repository_url": "https://github.com/weihao0929/icon_library",
-  
-  "library_icon": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Ayden_icon.jpg",
-  "icon": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Ayden_icon.jpg",
-  
-  "base_path": "JPEG/",
-  "last_updated": "2024-01-01",
   "icons": [
     {
-      "name": "Delian Reader",
+      "name": "Ayden_icon.jpg",
+      "url": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Ayden_icon.jpg"
+    },
+    {
+      "name": "Delian_Reader.JPG",
       "url": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Delian_Reader.JPG"
     },
     {
-      "name": "Elsa Speak", 
+      "name": "Elsa_Speak.JPG", 
       "url": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Elsa_Speak.JPG"
     },
     {
-      "name": "Fell Translator",
+      "name": "Fell_Translator.JPG",
       "url": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Fell_Translator.JPG"
     },
     {
-      "name": "Picsew",
+      "name": "Picsew.JPG",
       "url": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Picsew.JPG"
     },
     {
-      "name": "Watch Faces",
+      "name": "Watch_Faces.JPG",
       "url": "https://raw.githubusercontent.com/weihao0929/icon_library/main/JPEG/Watch_Faces.JPG"
     }
   ]

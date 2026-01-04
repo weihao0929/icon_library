@@ -1,0 +1,90 @@
+name: Update Ayden_icon.json Structure
+
+# 触发条件：当 icon 文件夹有变动，或者手动触发
+on:
+  push:
+    paths:
+      - 'icon/**' # 监听改名后的 icon 文件夹
+  workflow_dispatch:
+
+permissions:
+  contents: write # 给予脚本修改仓库文件的权限
+
+jobs:
+  update_json:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Generate and update JSON script
+      id: generator
+      run: |
+        import os
+        import json
+
+        # --- 配置区域 ---
+        icon_folder = 'icon'
+        json_file_path = 'Documents/Ayden_icon.json'
+        # 注意：这里的 URL 路径已经指向新的 'icon' 文件夹
+        base_url = 'https://raw.githubusercontent.com/weihao0929/icon_library/main/icon/'
+        
+        # 定义 JSON 的基础结构，保留你提供的 name 和 description
+        json_data = {
+          "name": "Ayden_icon",
+          "icons": [], # 这个列表将被清空并重新生成
+          "description": " Ayden_icon 是 Ayden 呕心沥血收集的图标集 "
+        }
+        # ----------------
+
+        new_icons_list = []
+
+        # 1. 扫描 icon 文件夹
+        if os.path.exists(icon_folder):
+            # 获取文件列表并排序，保证每次生成的顺序一致
+            files = sorted(os.listdir(icon_folder))
+            for filename in files:
+                # 过滤掉不需要的文件类型（比如 .DS_Store 或隐藏文件）
+                if filename.startswith('.'):
+                    continue
+                    
+                # 只处理常见的图片格式 (你可以根据需要添加例如 .webp)
+                if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.svg')):
+                    # 构建单个图标对象
+                    icon_entry = {
+                        "name": filename,
+                        "url": base_url + filename
+                    }
+                    new_icons_list.append(icon_entry)
+        else:
+            print(f"Warning: Folder '{icon_folder}' not found.")
+
+        # 2. 将生成的新列表填入基础结构中
+        json_data["icons"] = new_icons_list
+
+        # 3. 确保 Documents 文件夹存在
+        os.makedirs(os.path.dirname(json_file_path), exist_ok=True)
+
+        # 4. 写入 JSON 文件
+        # ensure_ascii=False 用于正确保存中文
+        with open(json_file_path, 'w', encoding='utf-8') as f:
+            json.dump(json_data, f, ensure_ascii=False, indent=4)
+        
+        print(f"JSON structure updated successfully with {len(new_icons_list)} icons.")
+
+      shell: python
+
+    - name: Commit and Push changes
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        # 添加可能发生变化的文件
+        git add Documents/Ayden_icon.json
+        # 检查是否有变化，有变化则提交，无变化则跳过 (避免报错)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update Ayden_icon.json structure" && git push)
